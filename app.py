@@ -76,6 +76,13 @@ with tab1:
                 set_feat('cp_time', cp_time / 72.0)
                 set_feat('cp_dose', 0 if cp_dose == "D1 (Basso)" else 1)
                 
+                # AMPLIFICATORE DI SEGNALE: Copiamo i cursori su tutte le feature
+                for nome_feature in moa_features:
+                    if nome_feature.startswith('g-'):
+                        input_data[0, moa_features.index(nome_feature)] = g0
+                    elif nome_feature.startswith('c-'):
+                        input_data[0, moa_features.index(nome_feature)] = c0
+                
                 # TRUCCO DEL BROADCASTING: Amplifichiamo il segnale degli slider
                 # Applichiamo il valore del cursore a blocchi di 50 geni/cellule
                 for i in range(50):
