@@ -1,5 +1,13 @@
 *.xls
 *.csv
-*.pkl
 *.json
-medical_model.h5
+*.xlsx
+*.h5
+*.hdf5
+*.pkl
+*.pt
+*.ckpt
+*.log
+*.ipynb_checkpoints
+*.pyc
+__pycache__/
