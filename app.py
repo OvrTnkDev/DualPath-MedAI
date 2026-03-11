@@ -15,7 +15,7 @@ def load_assets():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
     # Path 1: MoA (Biologico)
-    moa_model = tf.keras.models.load_model(os.path.join(current_dir, 'moa_model.h5'))
+    moa_model = tf.keras.models.load_model(os.path.join(current_dir, 'moa_nn_model.h5'))
     with open(os.path.join(current_dir, 'feature_cols.json'), 'r') as f:
         moa_features = json.load(f)
     with open(os.path.join(current_dir, 'target_labels.json'), 'r') as f:
