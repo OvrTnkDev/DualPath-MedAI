@@ -105,7 +105,7 @@ with tab1:
                 cols[idx].metric(label=row['Meccanismo'][:15]+"...", value=f"{row['Probabilità']*100:.1f}%")
 
 # ==========================================
-# TAB 2: MODELLO CLINICO
+# TAB 2: MODELLO CLINICO (Versione Blindata)
 # ==========================================
 with tab2:
     st.header("Predizione Effetti Collaterali (NLP)")
@@ -119,26 +119,33 @@ with tab2:
         
     if st.button("Prevedi Effetti Collaterali"):
         with st.spinner("Analisi testuale in corso..."):
-            combined_text = str(medical_condition) + " " + str(drug_class)
+            combined_text = str(medical_condition).lower() + " " + str(drug_class).lower()
             
+            # Trasformazione TF-IDF
             X_med_input = tfidf.transform([combined_text]).toarray()
             
-            med_preds = med_model.predict(X_med_input)[0]
-            
-            med_results = pd.DataFrame({
-                'Effetto Collaterale': mlb.classes_,
-                'Rischio': med_preds
-            }).sort_values(by='Rischio', ascending=False)
-            
-            st.subheader("Top 5 Effetti Collaterali Previsti")
-            top_5_med = med_results.head(5)
+            # 1. Controllo: se l'input è sconosciuto (vettore di zeri)
+            if np.all(X_med_input == 0):
+                st.warning("⚠️ Termini non riconosciuti. Prova con parole come 'Acne', 'Diabetes', 'SSRIs' o 'Tetracyclines'.")
+            else:
+                # 2. Se i termini sono validi, procediamo con predizione e visualizzazione
+                med_preds = med_model.predict(X_med_input)[0]
+                
+                med_results = pd.DataFrame({
+                    'Effetto Collaterale': mlb.classes_,
+                    'Rischio': med_preds
+                }).sort_values(by='Rischio', ascending=False)
+                
+                st.subheader("Top 5 Effetti Collaterali Previsti")
+                top_5_med = med_results.head(5)
 
-            med_chart_data = top_5_med.set_index('Effetto Collaterale')
-            st.bar_chart(med_chart_data['Rischio'], color="#ff4b4b")
+                # Grafico (ora dentro l'else, quindi top_5_med ESISTE per forza)
+                med_chart_data = top_5_med.set_index('Effetto Collaterale')
+                st.bar_chart(med_chart_data['Rischio'], color="#ff4b4b")
 
-            # Indentazione corretta
-            for _, row in top_5_med.iterrows():
-                risk_val = float(row['Rischio'])
-                st.write(f"**{row['Effetto Collaterale']}**")
-                st.progress(min(risk_val, 1.0))
-                st.caption(f"Probabilità di insorgenza: {risk_val*100:.2f}%")
+                # Elenco dettagliato con barre di progresso
+                for _, row in top_5_med.iterrows():
+                    risk_val = float(row['Rischio'])
+                    st.write(f"**{row['Effetto Collaterale']}**")
+                    st.progress(min(risk_val, 1.0))
+                    st.caption(f"Probabilità di insorgenza: {risk_val*100:.2f}%")
