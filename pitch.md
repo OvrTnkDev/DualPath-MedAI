@@ -118,3 +118,53 @@ Il Minimum Viable Product (MVP) è pienamente operativo e validato su dataset in
 - Rilascio di API proprietarie per l'integrazione con software di terze parti.
 
 Siamo pronti a trasformare il modo in cui i farmaci arrivano sul mercato.
+
+---
+
+## Analisi Clinica NLP
+
+**Focus:** Trasformare il linguaggio naturale in dati numerici per predire gli effetti collaterali.
+
+- Pulizia dei dati sporchi e incoerenti
+- Codifica multi-label dei target clinici
+- Creazione di feature testuali tramite TF-IDF
+- Addestramento di una rete neurale multi-label
+- Validazione con metriche AUC
+
+---
+
+## Pulizia dei dati clinici
+
+> Cella Notebook di riferimento: 31
+
+- Estrazione degli effetti collaterali con **Regex**:
+  - Gestione di virgole, punti e virgola, parentesi
+  - Conversione in liste standardizzate
+- Esempio:
+"Nausea; Vomito (raro), mal di testa" →
+['nausea', 'vomito', 'mal di testa']
+
+
+---
+## Codifica Multi-Label dei Target
+
+> Cella Notebook di riferimento: 31
+
+- Utilizzo di **MultiLabelBinarizer**:
+  - Ogni effetto collaterale diventa una colonna
+  - 1 = presenza, 0 = assenza
+- Gestione di più effetti collaterali simultanei
+
+**Importante:** rende i dati numerici compatibili con la rete neurale.
+
+---
+
+## Feature Engineering: TF-IDF
+
+> Cella Notebook di riferimento: 32
+
+- Combinazione colonne:
+  - medical_condition + drug_classes
+- Trasformazione in numeri con **TfidfVectorizer**
+
+**Obiettivo:** pesare termini medici più informativi e creare feature rilevanti per la rete neurale.
