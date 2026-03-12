@@ -53,6 +53,23 @@ style: |
 
 ---
 
+<div>
+<center>
+
+<h2>
+Pipeline
+</h2>
+
+  <img
+  src="image/pipeline.png" 
+  width="800" height="500" 
+  alt="Machine Learning Pipeline">
+
+</center>
+</div>
+
+---
+
 ## Il Problema del Mercato
 
 Sviluppare un nuovo farmaco richiede in media oltre 10 anni e investimenti miliardari.
