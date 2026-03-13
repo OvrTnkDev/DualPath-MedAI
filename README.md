@@ -23,5 +23,19 @@ DualPath-MedAI é un agente AI progettato per assistere i ricercatori farmaceuti
 - **Collaborazione Efficace**: Facilita la collaborazione tra ricercatori, migliorando la comunicazione e la condivisione delle informazioni.
 - **Adattabilità**: Può essere personalizzato per adattarsi a diverse aree terapeutiche e tipi di ricerca farmaceutica.
 ---
+
+## Roadmap e Prossimi Passi
+
+Il Minimum Viable Product (MVP) è pienamente operativo e validato su dataset internazionali.
+
+**Fase 2 (Scale-up):**
+
+- Addestramento continuo tramite Real-World Data provenienti dai database ospedalieri.
+- Rilascio di API proprietarie per l'integrazione con software di terze parti.
+
+Siamo pronti a trasformare il modo in cui i farmaci arrivano sul mercato.
+
+--- 
+
 ## Conclusione
 DualPath-MedAI rappresenta un passo avanti significativo nella ricerca farmaceutica, combinando l'analisi dei dati e la generazione di ipotesi per accelerare la scoperta di nuovi farmaci. Con la sua capacità di integrare e analizzare grandi quantità di dati, DualPath-MedAI ha il potenziale per rivoluzionare il modo in cui i farmaci vengono scoperti e sviluppati, portando a trattamenti più efficaci e innovativi per i pazienti in tutto il mondo.
